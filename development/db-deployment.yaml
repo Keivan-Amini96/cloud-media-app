@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+  labels:
+    App: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      App: db
+  template:
+    metadata:
+      labels:
+        App: db
+    spec:
+      containers:
+      - name: firestore-proxy
+        image: google/cloud-sdk
+        command: ["sh", "-c", "gcloud beta emulators firestore start --host-port=0.0.0.0:8080"]
+        ports:
+        - containerPort: 8080
+        env:
+        - name: FIRESTORE_PROJECT_ID
+          value: p18-18
+        - name: FIRESTORE_HOST_PORT
+          value: "0.0.0.0:8080"

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment-prod
+  labels:
+    App: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      App: db
+  template:
+    metadata:
+      labels:
+        App: db
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: default-pool
+      containers:
+      - name: firestore-proxy
+        image: google/cloud-sdk
+        command: ["sh", "-c", "gcloud beta emulators firestore start --host-port=0.0.0.0:8080"]
+        ports:
+        - containerPort: 8080
+        env:
+        - name: FIRESTORE_PROJECT_ID
+          value: p18-18
+        - name: FIRESTORE_HOST_PORT
+          value: "0.0.0.0:8080"
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+          limits:
+            cpu: "1000m"
+            memory: "1Gi"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
