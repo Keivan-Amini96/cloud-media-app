@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: backend-deployment
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: backend
+    template:
+        metadata:
+            labels:
+                app: backend
+        spec:
+            containers:
+                - name: backend
+                  image: gcr.io/p18-18/backend:latest
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: 8080
+                  env:
+                      - name: GOOGLE_APPLICATION_CREDENTIALS
+                        value: "/app/key.json"
+                  # volumeMounts:
+                  #     - name: service-account-credentials
+                  #       mountPath: "/app/firebase-service-account-key.json"
+                  #       subPath: firebase-service-account-key.json
+            # volumes:
+            #     - name: service-account-credentials
+            #       secret:
+            #           secretName: backend-service-account-key

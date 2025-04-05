@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+      role: web
+      instance: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+        role: web
+        instance: frontend
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: instance
+                      operator: In
+                      values:
+                        - frontend
+                topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: frontend
+          image: gcr.io/p18-18/frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
