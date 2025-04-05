@@ -33,7 +33,7 @@ const App = () => {
 	const [nickname, setNickname] = useState("");
 	const [isEditingNickname, setIsEditingNickname] = useState(false);
 
-	const API_URL = "https://socialm.duckdns.org";
+	const API_URL = "http://34.139.26.88:8080";
 
 	// Handle Firebase auth state
 	useEffect(() => {

@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web1-deployment
+  name: frontend-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: nginx
+      app: frontend
       role: web
-      instance: web1
+      instance: frontend
   template:
     metadata:
       labels:
-        app: nginx
+        app: frontend
         role: web
-        instance: web1
+        instance: frontend
     spec:
       affinity:
         podAntiAffinity:
@@ -26,11 +26,11 @@ spec:
                     - key: instance
                       operator: In
                       values:
-                        - web1
+                        - frontend
                 topologyKey: "kubernetes.io/hostname"
       containers:
-        - name: nginx
-          image: gcr.io/socialmapp-f1941/nginx-pod:latest
+        - name: frontend
+          image: gcr.io/p18-18/frontend:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80

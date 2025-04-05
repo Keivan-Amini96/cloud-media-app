@@ -2,13 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyBXtRKYU-4NJryhiKEAuI9EahdWv5BEiiI",
-	authDomain: "socialmapp-f1941.firebaseapp.com",
-	projectId: "socialmapp-f1941",
-	storageBucket: "socialmapp-f1941.firebasestorage.app",
-	messagingSenderId: "667860939194",
-	appId: "1:667860939194:web:56a5e2bbc2545affffed83",
-	measurementId: "G-PDKKW2W4NT",
+  apiKey: "AIzaSyCyNMs1kclZEIRwKNmFGle-E0uAyikenmw",
+  authDomain: "p18-18.firebaseapp.com",
+  projectId: "p18-18",
+  storageBucket: "p18-18.firebasestorage.app",
+  messagingSenderId: "731106782115",
+  appId: "1:731106782115:web:fb2078ebc2728b3f674816",
 };
 
 const app = initializeApp(firebaseConfig);

@@ -7,7 +7,7 @@ const app = express();
 // Allow specific origin
 
 const corsOptions = {
-  origin: "*", // Allow the frontend domain
+  origin: "http://34.73.211.226", // Allow the frontend domain
   methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
   allowedHeaders: [
     "Origin",
@@ -67,7 +67,7 @@ admin.initializeApp({
 
 const firestore = admin.firestore();
 const storage = new Storage();
-const bucketName = "socialmapp-images-firebase";
+const bucketName = "p18-18.firebasestorage.app";
 const bucket = storage.bucket(bucketName);
 
 // Middleware to verify Firebase ID token

@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: nginx-service
+    name: frontend-service
 spec:
     selector:
-        app: nginx
+        app: frontend
         role: web
     ports:
         - protocol: TCP
